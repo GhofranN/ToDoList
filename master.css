@@ -1,0 +1,113 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.container {
+  width: 500px;
+  margin: 20px auto;
+}
+.form {
+  background-color: #eee;
+  border-radius: 6px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+.input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  flex: 1;
+}
+.input:focus {
+  outline: none;
+}
+.add {
+  border: none;
+  background-color: #f44336;
+  color: white;
+  padding: 10px;
+  border-radius: 6px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.tasks {
+  background-color: #eee;
+  margin-top: 20px;
+  border-radius: 6px;
+  padding: 20px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+}
+.tasks .task {
+  background-color: white;
+  padding: 10px;
+  border-radius: 6px;
+  display: grid;
+  grid-template-columns: 300px repeat(4, 1px);
+  transition: 0.3s;
+  /* cursor: pointer; */
+  border: 1px solid #ccc;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+}
+.tasks .task input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  flex: 1;
+}
+.tasks .task input:focus {
+  outline: none;
+}
+
+.tasks .task:not(:last-child) {
+  margin-bottom: 15px;
+}
+.tasks .task:hover {
+  background-color: #f7f7f7;
+}
+.tasks .task.done {
+  opacity: 0.5;
+}
+.fa-trash {
+  font-weight: bold;
+  font-size: 17px;
+  color: red;
+  cursor: pointer;
+}
+.fa-check {
+  font-weight: bold;
+  font-size: 17px;
+  color: green;
+  cursor: pointer;
+}
+
+.fa-edit {
+  font-weight: bold;
+  font-size: 17px;
+  color: blue;
+  cursor: pointer;
+}
+
+/* .fa-pencil::before {
+  content: '\f040';
+  font-weight: bold;
+  font-size: 17px;
+  color: green;
+  cursor: pointer;
+} */
+
+.fa-bookmark {
+  font-weight: bold;
+  font-size: 17px;
+  color: #d4d5b1;
+  /* border: 1px solid yellow; */
+  cursor: pointer;
+}
+
+.saved {
+  color: #edf110;
+}
