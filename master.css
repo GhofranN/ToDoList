@@ -1,37 +1,178 @@
+/* Global Rules Start */
+:root {
+  --basicColor: #db5c4d;
+  --seconderyColor: #474746;
+  --thirdColor: #eae2d9;
+  --fourthColor: #fdf6ee;
+}
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: cursive;
+  background-color: var(--thirdColor, 'white');
+}
+.page {
+  height: 100vh;
+}
+.page::before {
+  content: '';
+  position: fixed;
+  width: 300%;
+  height: 100%;
+  background-color: var(--basicColor, 'black');
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) skew(0, -10deg);
+  border-radius: 50%;
+  z-index: -1;
+  animation: waving 5s ease-in-out infinite alternate;
 }
 .container {
   width: 500px;
   margin: 20px auto;
 }
+/* Global Rules End */
+
+/* Header Start */
+.header {
+  height: 80px;
+  background-color: var(--thirdColor, 'black');
+  display: grid;
+  grid-template-columns: repeat(3, 75px) 300px;
+}
+.header .four-pointed-star {
+  position: relative;
+  margin: 20px;
+}
+
+.header .four-pointed-star:before {
+  content: '';
+  position: absolute;
+  background: var(--basicColor);
+  width: 30px;
+  height: 35px;
+  transition: 0.5s;
+  transform: rotate(-45deg) skewX(22.5deg) skewY(22.5deg);
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+}
+
+.header .four-pointed-star:after {
+  content: '';
+  position: absolute;
+  background: var(--basicColor);
+  width: 30px;
+  height: 35px;
+  transition: 0.5s;
+  transform: rotate(45deg) skewX(22.5deg) skewY(22.5deg);
+}
+
+.header p {
+  line-height: 0.8;
+  font-size: xx-large;
+}
+/* Header End */
+
+/* Task Card Start */
 .form {
-  background-color: #eee;
+  background-color: var(--seconderyColor, 'white');
   border-radius: 6px;
   padding: 20px;
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 300px repeat(2, 70px);
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
 }
 .input {
   padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  color: var(--thirdColor, 'white');
+  border: none;
+  caret-color: var(--thirdColor, 'white');
   flex: 1;
+  background-color: var(--seconderyColor, 'white');
+  border-bottom: 1px solid var(--thirdColor, 'white');
 }
+
 .input:focus {
   outline: none;
 }
-.add {
+.add,
+.del {
   border: none;
-  background-color: #f44336;
-  color: white;
-  padding: 10px;
-  border-radius: 6px;
+  font-size: 25px;
+  font-weight: 300;
+  color: var(--seconderyColor, 'black');
+  border-radius: 50%;
   margin-left: 10px;
   cursor: pointer;
+  width: 50px;
+  height: 50px;
+  -webkit-border-radius: 50%;
+  background-color: var(--fourthColor, 'white');
 }
-.tasks {
-  background-color: #eee;
+
+.del {
+  position: relative;
+}
+.del:hover {
+  background-color: var(--basicColor, 'white');
+}
+
+.del .fa-trash {
+  position: absolute;
+  left: 25px;
+  top: 8px;
+  font-size: initial;
+  transform: translate(50%, 50%);
+  -webkit-transform: translate(-50%, 50%);
+  color: var(--seconderyColor, 'black');
+}
+
+.add:hover {
+  background-color: var(--basicColor, 'white');
+}
+
+.task-card {
+  width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: var(--fourthColor, 'white');
+  text-align: center;
+}
+.task-card h2 {
+  margin: 0 0 20px;
+  background-color: var(--basicColor, 'black');
+  color: #fff;
+  padding: 10px 15px 20px;
+  width: calc(100% + 50px);
+  position: relative;
+  left: -40px;
+  height: 15px;
+  font-weight: lighter;
+}
+.task-card h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -20px;
+  border-width: 10px;
+  border-color: #b3483b #b3483b transparent transparent;
+  border-style: solid;
+}
+.task-card h2::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -20px;
+  border-width: 10px;
+  border-color: #b3483b transparent transparent #b3483b;
+  border-style: solid;
+}
+
+.task-card .tasks {
   margin-top: 20px;
   border-radius: 6px;
   padding: 20px;
@@ -40,74 +181,66 @@ body {
   -ms-border-radius: 6px;
   -o-border-radius: 6px;
 }
-.tasks .task {
-  background-color: white;
+.task-card .tasks .task {
+  background-color: var(--mainColor, 'white');
   padding: 10px;
   border-radius: 6px;
   display: grid;
-  grid-template-columns: 300px repeat(4, 1px);
+  grid-template-columns: 215px repeat(4, 1px);
   transition: 0.3s;
-  /* cursor: pointer; */
-  border: 1px solid #ccc;
   justify-content: space-around;
   align-content: center;
   align-items: center;
 }
-.tasks .task input {
+.task-card .tasks .task input {
   padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  border: none;
+  color: var(--seconderyColor, 'white');
+  caret-color: var(--seconderyColor, 'white');
+  background-color: var(--fourthColor, 'white');
   flex: 1;
 }
-.tasks .task input:focus {
+.task-card .tasks .task input:focus {
   outline: none;
+  border-bottom: 1px solid var(--seconderyColor, 'white');
 }
 
-.tasks .task:not(:last-child) {
+.task-card .tasks .task:not(:last-child) {
   margin-bottom: 15px;
 }
-.tasks .task:hover {
-  background-color: #f7f7f7;
+.task-card .tasks .task:hover {
+  background-color: var(--basicColor, '#eee');
 }
-.tasks .task.done {
-  opacity: 0.5;
+.task-card .tasks .task.done {
+  background-color: #fbdfbf;
 }
-.fa-trash {
-  font-weight: bold;
-  font-size: 17px;
-  color: red;
-  cursor: pointer;
-}
-.fa-check {
-  font-weight: bold;
-  font-size: 17px;
-  color: green;
-  cursor: pointer;
-}
-
+.fa-trash,
+.fa-check,
 .fa-edit {
-  font-weight: bold;
   font-size: 17px;
-  color: blue;
+  color: var(--seconderyColor, 'black');
   cursor: pointer;
 }
-
-/* .fa-pencil::before {
-  content: '\f040';
-  font-weight: bold;
-  font-size: 17px;
-  color: green;
-  cursor: pointer;
-} */
 
 .fa-bookmark {
   font-weight: bold;
   font-size: 17px;
-  color: #d4d5b1;
-  /* border: 1px solid yellow; */
+  color: var(--seconderyColor, 'black');
   cursor: pointer;
 }
+/* Task Card End */
 
-.saved {
-  color: #edf110;
+/* Animation Start */
+@keyframes waving {
+  from {
+    transform: translateX(-50%) skew(0, -10deg);
+    -webkit-transform: translateX(-50%) skew(0, -10deg);
+    -moz-transform: translateX(-50%) skew(0, -10deg);
+    -ms-transform: translateX(-50%) skew(0, -10deg);
+    -o-transform: translateX(-50%) skew(0, -10deg);
+  }
+  to {
+    transform: translateX(-30%) skew(10deg, 0);
+  }
 }
+/* Animation End */

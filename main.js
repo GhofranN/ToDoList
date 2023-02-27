@@ -1,12 +1,31 @@
+// ################## Variables Declaration Start #################### 
 let input = document.querySelector(".input");
 let submit = document.querySelector(".add");
+let delAll = document.querySelector(".del");
 let tasksDiv = document.querySelector(".tasks");
+let title = document.querySelector(".task-card h2");
 
 
+ // Creating a date object
+let today = new Date();  
+let month = today.toLocaleString('default', { month: 'short' }); // Getting short month name (e.g. "Oct") 
+let dd = today.getDate();  
+let yy = today.getFullYear();
+let DateStr =  dd + " " + month.toUpperCase() + ", " + yy;
+
+// Empty Array To Store The Tasks
+let arrayOfTasks = [];
+
+// ################## Variables Declaration End ####################
+
+// Get ToDay Date and set it to card title  
 window.onload = function(){
   input.focus();
+  title.innerHTML = DateStr + " Daily Tasks"
 }
 
+
+// Get Enter button clickable behaviour  
 input.addEventListener("keypress", (e) =>{
     if(e.key === "Enter"){
       e.preventDefault();
@@ -14,8 +33,20 @@ input.addEventListener("keypress", (e) =>{
     }
 });
 
-// Empty Array To Store The Tasks
-let arrayOfTasks = [];
+// Delete All tasks and reset variables 
+delAll.onclick = function () {
+  console.log("Hello del ...");
+    // Empty Tasks Div
+  tasksDiv.innerHTML = "";
+  let data = window.localStorage.getItem("tasks");
+  if (data) {
+  console.log("Hello del ...",data);
+  window.localStorage.removeItem("tasks");
+  arrayOfTasks = [];
+  console.log("Hello del ...",data);
+  }
+
+}
 
 // Check if Theres Tasks In Local Storage
 if (localStorage.getItem("tasks")) {
@@ -51,23 +82,13 @@ tasksDiv.addEventListener("click", (e) => {
   }
 
     if (e.target.classList.contains("fa-edit")) {
-    // Toggle Completed For The Task
-    // toggleStatusTaskWith(e.target.parentElement.getAttribute("data-id"));
-    // Toggle Done Class
-    // e.target.parentElement.classList.toggle("done");
-    // console.log("Elm from contain ", e.target.previousElementSibling);
+  
     console.log("Elm from first child ", e.target.parentElement.firstElementChild);
-    //console.log("Elm from first child text ", e.target.parentElement.firstElementChild.value);
      e.target.parentElement.firstElementChild.disabled = false
      e.target.previousElementSibling.style.display = 'block';
-    //editTaskInput(e.target.parentElement);
   }
 
    if (e.target.classList.contains("fa-bookmark")) {
-    // Toggle Completed For The Task
-    // toggleStatusTaskWith(e.target.parentElement.getAttribute("data-id"));
-    // Toggle Done Class
-    e.target.classList.add("saved");
     editTaskInput(e.target.parentElement);
     e.preventDefault();
   }
@@ -109,39 +130,28 @@ function addElementsToPageFrom(arrayOfTasks) {
 
     // Create Save Button
     let sav = document.createElement("i");
-    // done.className = "done";
     sav.className = "fa fa-bookmark";
     sav.style.display = 'none';
-    // done.appendChild(document.createTextNode("Done"));
     // Append Button To Main Div
     div.appendChild(sav);
-
 
      // Create Edit Button
     let edit = document.createElement("i");
     edit.className = "fa fa-edit";
-    // edit.appendChild(document.createTextNode("Edit"));
-    // Append Button To Main Div
     div.appendChild(edit);
-
 
     // Create Delete Button
     let span = document.createElement("i");
     span.className = "fa fa-trash";
-    // span.appendChild(document.createTextNode("Delete"));
-    // Append Button To Main Div
     div.appendChild(span);
 
     // Create Done Button
     let done = document.createElement("i");
-    // done.className = "done";
     done.className = "fa fa-check";
-    // done.appendChild(document.createTextNode("Done"));
-    // Append Button To Main Div
     div.appendChild(done);
 
   
-    // Add Task Div To Tasks Container
+  // Add Task Div To Tasks Container
     tasksDiv.appendChild(div);
   });
 }
@@ -159,10 +169,6 @@ function getDataFromLocalStorage() {
 }
 
 function deleteTaskWith(taskId) {
-  // For Explain Only
-  // for (let i = 0; i < arrayOfTasks.length; i++) {
-  //   console.log(`${arrayOfTasks[i].id} === ${taskId}`);
-  // }
   arrayOfTasks = arrayOfTasks.filter((task) => task.id != taskId);
   addDataToLocalStorageFrom(arrayOfTasks);
 }
@@ -189,5 +195,5 @@ function editTaskInput(taskElm){
   }
   addDataToLocalStorageFrom(arrayOfTasks);
   
-    console.log("Elm is " ,taskElm.firstElementChild.value);
+    // console.log("Elm is " ,taskElm.firstElementChild.value);
 }
