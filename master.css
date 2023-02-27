@@ -33,7 +33,7 @@ body {
 
 /* Header Start */
 .header {
-  height: 80px;
+  height: 110px;
   background-color: var(--thirdColor, 'black');
   display: grid;
   grid-template-columns: repeat(3, 75px) 300px;
@@ -112,16 +112,16 @@ body {
   height: 50px;
   -webkit-border-radius: 50%;
   background-color: var(--fourthColor, 'white');
-}
-
-.del {
   position: relative;
 }
-.del:hover {
+
+.del:hover,
+.add:hover {
   background-color: var(--basicColor, 'white');
 }
 
-.del .fa-trash {
+.del .fa-trash,
+.add .fa-plus {
   position: absolute;
   left: 25px;
   top: 8px;
@@ -129,10 +129,6 @@ body {
   transform: translate(50%, 50%);
   -webkit-transform: translate(-50%, 50%);
   color: var(--seconderyColor, 'black');
-}
-
-.add:hover {
-  background-color: var(--basicColor, 'white');
 }
 
 .task-card {
